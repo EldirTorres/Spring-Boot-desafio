@@ -10,6 +10,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
 @Table(name="USERS")
@@ -24,9 +28,15 @@ public class User {
 	public String name;
 	
 	@Column(name="email")
+	@NotBlank(message = "El formato del correo no es el correcto debe cumplir con el siguiente EJ: prueba@gmail.com")
+	@NotNull(message = "El formato del correo no es el correcto debe cumplir con el siguiente EJ: prueba@gmail.com")
+	@Pattern(regexp = "\\w+([\\.-]?\\w+)*@\\w+([\\.-]?\\w+)*(\\.\\w{2,4})+")
 	public String email;
 	
 	@Column(name="password")
+	@NotBlank(message = "El formato de la contraseña no es la correcta debe cumplir con el siguiente EJ: Chile.2019")
+	@NotNull(message = "El formato de la contraseña no es la correcta debe cumplir con el siguiente EJ: Chile.2019")
+	@Pattern(regexp = "^(?=.*\\d)(?=.*[!\\/\\\\@#\\$%\\^&\\*\\(\\)-\\+=_\\?\\.])(?=.*[A-Z])(?=.*[a-z])\\S{8,16}$")
 	public String password;
 	
 	@Column(name="created")

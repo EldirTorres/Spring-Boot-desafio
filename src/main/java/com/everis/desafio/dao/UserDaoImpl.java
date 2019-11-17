@@ -1,5 +1,6 @@
 package com.everis.desafio.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.hibernate.Session;
@@ -28,6 +29,11 @@ public class UserDaoImpl implements UserDao {
 		return user;
 	}
 
-	
+	@Override
+	public List<User> getUser() {
+		Session session = this.sessionFactory.getCurrentSession();
+		List<User> userlist = session.createQuery("from User").list();
+		return userlist;
+	}
 
 }
